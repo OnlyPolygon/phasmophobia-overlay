@@ -1,4 +1,4 @@
-const version = "6.2.0 (Truck Overhaul)";
+const version = "8.1.0 (Tempest)";
 
 // Order is important here:
 // EMF-5 | Freezing | Spirit Box | Writing | Orbs | Fingerprints | DOTS
