@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css?family={fontFamily}:100,300,400,500,700,900&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,300);
+
+* {
+  font: normal 76px/1 Roboto, Helvetica, sans-serif;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.phas-dashboard {
+  background-color: transparent;
+  /* Top Right Bottom Left */
+  /* Yes, this is padding. I am calling it margin to keep naming "similar" */
+  padding: 2px 2px 2px 2px;
+}
+
+.name {
+  color: black;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.objective {
+  color: black;
+  font-size: 12px;
+}
+
+.optionals {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.conclusion {
+  color: black;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.evidence {
+  width: 100%;
+  height: 100%;
+  margin: auto auto;
+}
+
+.negative {
+  position: absolute;
+  fill: rgba(255, 0, 0, 1.0);
+}
+
+.inactive {
+  fill: rgb(255, 255, 255);
+}
+
+.active {
+  fill: rgba(50, 205, 50, 1);
+}
+
+.impossible {
+  fill: rgba(234, 66, 29, 0.6);
+}
+
+.impossible-completed {
+  fill: rgba(28, 69, 233, 0.3);
+}
+
+.strikethrough {
+  position: relative;
+}
+
+.strikethrough::after {
+  border-bottom: {{objectivesStrikethroughSize}}px solid {{objectivesStrikethroughColor}};
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: calc(50% - {{objectivesStrikethroughSize}}px / 2);
+}
+
+.evidence-inner-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.evidence-svg-container {
+  height: auto; 
+  margin: 0 5px;
+}
+
+.sighting-hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.sighting-inactive {
+  fill: {{sightingIconInactiveColor}};
+}
+
+.sighting-active {
+  fill: {{sightingIconActiveColor}};
+  height: {{sightingIconHeight}}px;
+  width: {{sightingIconHeight}}px;
+}
+
+.sighting-svg-container {
+  height: {{sightingIconHeight}}px;
+  width: {{sightingIconHeight}}px;
+  margin-left: 10px;
+}
+
+.possession-inactive {
+  display: none;
+  visibility: hidden;
+}
+
+.possession-active {
+  fill: {{possessionIconActiveColor}};
+  height: {{possessionIconHeight}}px;
+  width: {{possessionIconHeight}}px;
+}
+
+.possession-svg-container {
+  height: {{possessionIconHeight}}px;
+  width: {{possessionIconHeight}}px;
+}
+
+.water-svg-container {
+  height: {{waterIconHeight}}px;
+  width: {{waterIconHeight}}px;
+  margin-left: 10px;
+}
+
+.water-inactive {
+  fill: {{waterIconInactiveColor}};
+}
+
+.water-active {
+  fill: {{waterIconActiveColor}};
+}
+
+.divider-color {
+  border-color: white ;
+  padding: 30px;
+  margin: 15px;
+}
+.divider-width{
+  border-width: 25px;
+}
+.divider-type{
+  border-style: solid;
+  border-radius: 24px;
+}
+
+.phas-border {
+  border-color: white;
+  border-width: 3px;
+  border-radius: 3px;
+  border-style: solid;
+}
+
+.phas-version {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: grey;
+  opacity: 0;
+}
+
+.version-item {
+  opacity: 0;
+  transition: 1s linear all;
+}
+
+.show-version-item {
+  opacity: 1;
+  transition: 1s linear all;
+}
+
+/* @keyframes fade {
+  0%,100% { opacity: 0 }
+  30%,70% { opacity: 1 }
+} */
+
+.animated-box {
+  border-radius: 3px;
+}
+
+.animated-box h1 {
+  font-weight: 200;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+.animated-box p {
+  font-weight: 200;
+}
+
+/* The animation starts here */
+.animated-box {
+  position: relative;
+  border-radius: 3px;
+}
+
+.animated-box:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: {{animatedBorderRadius}}px;
+  background: linear-gradient({{animatedBorderAngle}}deg, {{animatedBorderColor}}, {{animatedBorderColorTwo}}, {{animatedBorderColorThree}});
+  clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+
+.animated-box-100:after {
+  background-size: 100% 100%;
+}
+
+.animated-box-300:after {
+  background-size: 300% 300%;
+}
+
+.animated-box.in:after {
+  animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 1s ease-in-out infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 15% 0%;
+  }
+  50% {
+    background-position: 85% 100%;
+  }
+  100% {
+    background-position: 15% 0%;
+  }
+}
+
+@keyframes frame-enter {
+  0% {
+    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+  25% {
+    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), calc(100% - {{animatedBorderWidth}}px) 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+  50% {
+    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, 100% 0%, 0% 0%);
+  }
+  75% {
+    -webkit-clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px 0%, 0% 0%);
+  }
+  100% {
+    -webkit-clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, 0% 100%);
+  }
+}
+
+/* CSS FOR GLITCHED ALERT */
+#console-container {
+  display: inline-block;
+  width: 95%;
+  max-width: 95%;
+  float: right;
+  font-size: 24px;
+  font-family: 'Source Code Pro', 'Inconsolata', monospace;
+}
+
+#text {
+  display: inline-block;
+  margin: .8em 0;
+  font-size: 18px;
+}
+
+.cursor {
+  display: inline-block;
+  height: 24px;
+  width: 8px;
+  background: #11f930; 
+  margin-left: -12px;
+}
+
+.prompt {
+  color: #11f930;
+  height: 24px;
+  font-size: 24px;
+}
+
+.hide {
+  display: none;
+}
+
+.hidden {
+  display: hidden;
+}
+
+.counters {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.counter-theme {
+  font-size: 12px;
+  color: black;
+}
+
+.location {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.location-theme {
+  font-size: {{locationFontSize}}px;
+  color: {{locationFontColor}};
+}
+
+.difficulty {
+  font-size: {{difficultyFontSize}}px;
+  color: {{difficultyFontColor}};
+}
+
+/* CSS FOR FLEX */
+.h-screen{
+  max-height: 100hv;
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-flow: column;
+}
+.flex-row{
+  flex-flow: row;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+}
+.flex-grow{
+  flex-grow: 1;
+}
+.justify-between{
+  justify-content:space-between;
+}
+.conclusion{
+  font-size: 200px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+  .st0{display:none;}
+  .st1{display:inline;fill:#FFFFFF;}
+  .st2{display:inline;}
+
+  .st4{opacity:0.4;}
+  .st5{opacity:0.4;}
+  .st6{opacity:0.6;}
