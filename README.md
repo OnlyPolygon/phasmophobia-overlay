@@ -8,9 +8,9 @@ Displays ghost options after two evidences have been selected.
 
 #### Cloud Install
 With this version the overlay will automatically update shortly after the patch
-2) In OBS add a Browser Source and paste this in the URL: `https://onlypolygon.github.io/phasmophobia-overlay/overlay.html`
-3) Set Width to 1390, Height to 1250, and check to enable refresh on activation
-4) Resize to fit your needs
+1) In OBS add a Browser Source and paste this in the URL: `https://onlypolygon.github.io/phasmophobia-overlay/overlay.html`
+2) Set Width to 1390, Height to 1250, and check to enable refresh on activation
+3) Resize to fit your needs
 
 #### Local Install
 With this version you'll need to check back after each path to see if there is an update
