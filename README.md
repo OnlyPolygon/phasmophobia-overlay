@@ -25,4 +25,4 @@ With this version you'll need to check back after each path to see if there is a
 - To interact with overlay, right click the browser source and choose interact
 - In OBS Studio you can use the context bar when selecting the source
 - To enter Evidence, simply click the relavent icon
-- To reset the overlay, click the lower box there "Searching..." and the ghost names appear
+- To reset the overlay, click the lower box where "Searching..." and the ghost names appear
