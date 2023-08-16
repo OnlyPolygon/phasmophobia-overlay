@@ -51,14 +51,17 @@
 
 .inactive {
   fill: rgb(255, 255, 255);
+  transition-duration: 200ms;
 }
 
 .active {
   fill: rgba(50, 205, 50, 1);
+  transition-duration: 200ms;
 }
 
 .impossible {
   fill: rgba(234, 66, 29, 0.6);
+  transition-duration: 200ms;
 }
 
 .impossible-completed {
@@ -67,15 +70,6 @@
 
 .strikethrough {
   position: relative;
-}
-
-.strikethrough::after {
-  border-bottom: {{objectivesStrikethroughSize}}px solid {{objectivesStrikethroughColor}};
-  content: "";
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: calc(50% - {{objectivesStrikethroughSize}}px / 2);
 }
 
 .evidence-inner-container {
@@ -93,50 +87,9 @@
   visibility: hidden;
 }
 
-.sighting-inactive {
-  fill: {{sightingIconInactiveColor}};
-}
-
-.sighting-active {
-  fill: {{sightingIconActiveColor}};
-  height: {{sightingIconHeight}}px;
-  width: {{sightingIconHeight}}px;
-}
-
-.sighting-svg-container {
-  height: {{sightingIconHeight}}px;
-  width: {{sightingIconHeight}}px;
-  margin-left: 10px;
-}
-
 .possession-inactive {
   display: none;
   visibility: hidden;
-}
-
-.possession-active {
-  fill: {{possessionIconActiveColor}};
-  height: {{possessionIconHeight}}px;
-  width: {{possessionIconHeight}}px;
-}
-
-.possession-svg-container {
-  height: {{possessionIconHeight}}px;
-  width: {{possessionIconHeight}}px;
-}
-
-.water-svg-container {
-  height: {{waterIconHeight}}px;
-  width: {{waterIconHeight}}px;
-  margin-left: 10px;
-}
-
-.water-inactive {
-  fill: {{waterIconInactiveColor}};
-}
-
-.water-active {
-  fill: {{waterIconActiveColor}};
 }
 
 .divider-color {
@@ -204,18 +157,6 @@
   border-radius: 3px;
 }
 
-.animated-box:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: {{animatedBorderRadius}}px;
-  background: linear-gradient({{animatedBorderAngle}}deg, {{animatedBorderColor}}, {{animatedBorderColorTwo}}, {{animatedBorderColorThree}});
-  clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px 100%, 100% 100%, 100% 0%, 0% 0%);
-}
-
 .animated-box-100:after {
   background-size: 100% 100%;
 }
@@ -237,24 +178,6 @@
   }
   100% {
     background-position: 15% 0%;
-  }
-}
-
-@keyframes frame-enter {
-  0% {
-    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px calc(100% - {{animatedBorderWidth}}px), {{animatedBorderWidth}}px 100%, 100% 100%, 100% 0%, 0% 0%);
-  }
-  25% {
-    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), calc(100% - {{animatedBorderWidth}}px) calc(100% - {{animatedBorderWidth}}px), calc(100% - {{animatedBorderWidth}}px) 100%, 100% 100%, 100% 0%, 0% 0%);
-  }
-  50% {
-    clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, calc(100% - {{animatedBorderWidth}}px) {{animatedBorderWidth}}px, 100% 0%, 0% 0%);
-  }
-  75% {
-    -webkit-clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px {{animatedBorderWidth}}px, {{animatedBorderWidth}}px 0%, 0% 0%);
-  }
-  100% {
-    -webkit-clip-path: polygon(0% 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, {{animatedBorderWidth}}px 100%, 0% 100%);
   }
 }
 
@@ -310,16 +233,6 @@
 .location {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.location-theme {
-  font-size: {{locationFontSize}}px;
-  color: {{locationFontColor}};
-}
-
-.difficulty {
-  font-size: {{difficultyFontSize}}px;
-  color: {{difficultyFontColor}};
 }
 
 /* CSS FOR FLEX */
