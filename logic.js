@@ -47,6 +47,7 @@ const ANSWER = {
   "0100110": "Hantu",
   "1100010": "Jinn",
   "0011100": "Mare",
+  "0110110": "Mimic",
   "0110010": "Mimic",
   "0111000": "Moroi",
   "1001010": "Myling",
@@ -73,7 +74,7 @@ const GHOSTS = [
   ["Hantu", "0100110"],
   ["Jinn", "1100010"],
   ["Mare", "0011100"],
-  ["Mimic", "0110010"],
+  ["Mimic", "0110110"],
   ["Moroi", "0111000"],
   ["Myling", "1001010"],
   ["Obake", "1000110"],
@@ -90,32 +91,6 @@ const GHOSTS = [
   ["Wraith", "1010001"],
   ["Yokai", "0010101"],
   ["Yurei", "0100101"],
-];
-options = [
-  "Banshee",
-  "Demon",
-  "Deogen",
-  "Goryo",
-  "Hantu",
-  "Jinn",
-  "Mare",
-  "Mimic",
-  "Moroi",
-  "Myling",
-  "Obake",
-  "Oni",
-  "Onryo",
-  "Phantom",
-  "Poltergeist",
-  "Raiju",
-  "Revenant",
-  "Shade",
-  "Spirit",
-  "Thaye",
-  "Twins",
-  "Wraith",
-  "Yokai",
-  "Yurei",
 ];
 compare = [
   "Banshee",
@@ -144,7 +119,7 @@ compare = [
   "Yurei",
 ];
 current = "0000000";
-temp = [];
+options = [];
 evdCount = 0;
 
 // Creates a function that lets me replace a character at a specific location (Made for updating current evidence)
@@ -156,39 +131,60 @@ String.prototype.replaceAt = function (index, replacement) {
   );
 };
 
-// Check if specified evidence is for specified ghost
-function checkEachGhost(ghost, evidence) {
-  if (GHOSTS[ghost][1][evidence] != 1) {
-    return false;
-  } else {
-    return true;
+// Reloads page to reset everything
+function reset() {
+  for (var i = 0; i < 7; i++) {
+    const ELEMENT = document.getElementById(EVIDENCE[i]);
+    ELEMENT.classList.add("inactive");
+    ELEMENT.classList.remove("active");
+    ELEMENT.classList.remove("impossible");
+    document.getElementById("ghost-type").innerHTML = "Searching...";
   }
+  location.reload();
 }
 
 // Calcultes the avaliable ghosts for 2 given evidences.
-function updateOptions() {
-  for (let i = 0; i < temp.length; i++) {
-    del = options.indexOf(temp[i]);
-    if (del != -1) {
-      options.splice(del, 1);
+function updateOptions(round) {
+  options = [];
+  ind = [];
+  for (let i = 0; i < current.length; i++) {
+    if (current[i] === "1") {
+      ind.push(i);
+    }
+  }
+  if (round === 2) {
+    for (let j = 0; j < GHOSTS.length; j++) {
+      if (GHOSTS[j][1][ind[0]] === "1" && GHOSTS[j][1][ind[1]] === "1") {
+        options.push(GHOSTS[j][0]);
+      }
+    }
+  }
+  if (round === 3) {
+    for (let j = 0; j < GHOSTS.length; j++) {
+      if (
+        GHOSTS[j][1][ind[0]] === "1" &&
+        GHOSTS[j][1][ind[1]] === "1" &&
+        GHOSTS[j][1][ind[2]] === "1"
+      ) {
+        options.push(GHOSTS[j][0]);
+      }
     }
   }
 }
 
 // Disables the button of evidence that isn't possible
 function disableButton() {
-  var tmp = 0000000;
+  var tmp = 0;
+
   // Adds current options evidnces to tmp
   for (var i = 0; i < options.length; i++) {
     tmp += parseInt(GHOSTS[compare.indexOf(options[i])][1]);
   }
-  //console.log(tmp);
   // Makes sure leading 0s are added back after math
   if (String(tmp).length < 7) {
     tmp = ("0000000" + tmp).slice(-7);
-    //console.log("running");
   }
-  //console.log(tmp);
+  console.log(tmp);
   hold = String(tmp);
   // Turns icon red and disables onClick
   for (var i = 0; i < hold.length; i++) {
@@ -199,6 +195,16 @@ function disableButton() {
       ELEMENT.onclick = null;
     }
   }
+}
+
+function updateEvidence(evidence) {
+  // If not update current to have a 1 in the evidence position
+  current = current.replaceAt(evidence, "1");
+  // Update icon to green and disable onClick
+  const ELEMENT = document.getElementById(EVIDENCE[evidence]);
+  ELEMENT.classList.remove("inactive");
+  ELEMENT.classList.add("active");
+  ELEMENT.onclick = null;
 }
 
 // Disables any evidence that isn't 1 in current
@@ -213,59 +219,43 @@ function disableButtonFinal() {
   }
 }
 
+// Finalizes overlay
+function finalEvidence() {
+  pick = ANSWER[current];
+  disableButtonFinal();
+  document.getElementById("ghost-type").innerHTML = pick;
+}
+
 // Main Function
 function checkEvidence(evidence) {
   evdCount++;
-  // If it's the 3rd evidence
-  if (evdCount === 3) {
-    current = current.replaceAt(evidence, "1");
-    pick = ANSWER[current];
-    disableButtonFinal();
-    //console.log(pick)
-    document.getElementById("ghost-type").innerHTML = pick;
-  }
+  updateEvidence(evidence);
 
-  // If not update current to have a 1 in the evidence position
-  current = current.replaceAt(evidence, "1");
-  // Add ghosts without evidence to list
-  for (let i = 0; i < GHOSTS.length; i++) {
-    if (checkEachGhost(i, evidence) != true) {
-      temp.push(options[i]);
+  // If it's the 3rd+ evidence
+  if (evdCount >= 3) {
+    if (current[4] != "1" || evdCount === 4) {
+      finalEvidence();
+    } else {
+      updateOptions(3);
+      disableButton();
+      var write = String(options).replace(/,/g, ", ");
+      document.getElementById("ghost-type").innerHTML = write;
     }
   }
-  // Update icon to green and disable onClick
-  const ELEMENT = document.getElementById(EVIDENCE[evidence]);
-  ELEMENT.classList.remove("inactive");
-  ELEMENT.classList.add("active");
-  ELEMENT.onclick = null;
+
   // On the second evidence
   if (evdCount === 2) {
-    updateOptions();
-    // Only need to update after 2 evidence since no evidence is exclusive
+    updateOptions(2);
     disableButton();
-    //console.log(options)
     // Adds a space between options and writes it
     var write = String(options).replace(/,/g, ", ");
     document.getElementById("ghost-type").innerHTML = write;
   }
-  //current = current.replaceAt(evidence, "1");
 }
+
 // Checks of the clicked evidence hasn't been selected (Probably not needed)
 function evidenceSelect(evidence) {
   if (current[evidence] != 1) {
     checkEvidence(evidence);
-    //console.log(evidence)
   }
-}
-
-// Reloads page to reset everything
-function reset() {
-  for(var i = 0; i < 7; i++){
-    const ELEMENT = document.getElementById(EVIDENCE[i]);
-    ELEMENT.classList.add("inactive");
-    ELEMENT.classList.remove("active");
-    ELEMENT.classList.remove("impossible");
-    document.getElementById("ghost-type").innerHTML = "Searching..."
-  }
-  location.reload();
 }
