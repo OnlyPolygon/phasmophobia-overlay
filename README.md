@@ -14,7 +14,7 @@ With this version the overlay will automatically update with no extra effort on 
 
 #### Local Install
 With this version you'll need to check back after each path to see if there is an update
-1. Go to [Releases](https://github.com/OnlyPolygon/phasmophobia-overlay/releases/tag/Latest) and download the Source Code (zip)
+1. Go to [Releases](https://github.com/OnlyPolygon/phasmophobia-overlay/releases/latest) and download the Source Code (zip)
 2. Extract folder where ever you find most convenient
 3. In OBS add a Browser Source and choose local file and point it to the overlay.html
 4. Set Width to 1390, Height to 1250, and check to enable refresh on activation
